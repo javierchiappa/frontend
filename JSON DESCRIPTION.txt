@@ -1,0 +1,316 @@
+Grupo 4 - Proyecto Busca Oficios
+Lista de Formatos de JSON, con 3 ejemplos cada uno
+verificar que funcionen convirtiendo a tabla
+https://codebeautify.org/json-to-html-converter#
+
+tratar todos los datos como string
+id autoasignable para registro, pero debe devolverla en los GET para poder linkear
+
+--------------------
+REGISTRO DE USUARIOS PRIORIDAD 1
+al recibir un PUT lo guarda en la base de datos
+--------------------
+
+JSON de Usuarios, PUT (para guardar en base de datos de registro)
+ID 1,2 y 3
+
+{
+	"usuarios": {
+		"usuario": [
+			{
+				"nombre": "Tom",
+				"apellido": "Cruise",
+				"direccion": "Calle Falsa",
+				"numCalle": "123",
+				"localidad": "Coquimbito",
+				"departamento": "10",
+				"email": "mailfalso@server.com",
+				"telefono": "123456789",
+				"password": "clavefalsa",
+			},
+			{
+				"nombre": "Juan",
+				"apellido": "Perez",
+				"direccion": "Segunda Calle Falsa",
+				"numCalle": "1234",
+				"localidad": "Barrio Los Tortolos",
+				"departamento": "3",
+				"email": "inventado@server.com",
+				"telefono": "987654321",
+				"password": "clavesegura",
+			},
+			{
+				"nombre": "Manolo",
+				"apellido": "Fulano",
+				"direccion": "Calle Mengano",
+				"numCalle": "456",
+				"localidad": "Barrio Fantasma",
+				"departamento": "5",
+				"email": "fulano@mengano.com",
+				"telefono": "5551234567",
+				"password": "altopassword1",
+			}
+		]
+	}
+}
+
+
+---------------------------------
+SECCION LOGUIN PRIORIDAD 3
+---------------------------------
+JSON para login, (PUT) 
+
+{
+	"login": {
+		"login": [
+			{
+				"email": "mailfalso@server.com",
+				"password": "clavefalsa",
+			},
+			{
+				"email": "inventado@server.com",
+				"password": "clavesegura",
+			},
+			{
+				"email": "fulano@mengano.com",
+				"password": "altopassword1",
+			}
+		]
+	}
+}
+
+ debe responder con un JSON:
+ 
+{
+	"loginstatus": {
+		"loginstatus": [
+			{
+				"email": "true",
+				"password": "true",
+			}
+		]
+	}
+}
+
+JSON para login incorrectos
+
+{
+	"login": {
+		"login": [
+			{
+				"email": "mailfalso2222@server.com",
+				"password": "clavefalsa",
+			},
+			{
+				"email": "inventado@server.com",
+				"password": "clavenoeslamisma",
+			},
+			{
+				"email": "fulano@mengano.com",
+				"password": "Altopassword1",
+			}
+		]
+	}
+}
+
+Debe Responder con un JSON 
+
+{
+	"loginstatus": {
+		"loginstatus": [
+			{
+				"email": "false",       <- Mostrar error "Mail no registrado"
+				"password": "false",
+			},
+			{
+				"email": "true",
+				"password": "false",       <---Mostrar error "Password Incorrecto"
+			},
+			{
+				"email": "true",
+				"password": "false",
+			}
+		]
+	}
+}
+
+
+-------------------
+REGISTRO DE CONTRATISTAS PRIORIDAD 1 (PUT)
+Id 8, 9 y 10
+-------------------
+
+{
+	"contratistas": {
+		"contratistas": [
+			{
+				"nombre": "Juan",
+				"apellido": "Gonzales",
+				"direccion": "Calle Super Falsa",
+				"numCalle": "323",
+				"localidad": "Coquimbito",
+				"departamento": "10",
+				"email": "juangonzales@server.com",
+				"telefono": "123456789",
+				"password": "clavejuan",
+				"id_oficio": "1,2",
+				"horarios": "Jueves y Viernes de 10:00 a 18:00",
+				"ubicacionDisponible": "8,9",
+				"imagen": "images/juangonzales.jpg",
+			},
+			{
+				"nombre": "Jose",
+				"apellido": "Zuluaga",
+				"direccion": "Cuarta Calle Falsa",
+				"numCalle": "3487",
+				"localidad": "Barrio Las Tortuguitas",
+				"departamento": "6",
+				"email": "inventado@server.com",
+				"telefono": "987654321",
+				"password": "claveZuluaga",
+				"id_oficio": "2",
+				"horarios": "Lunes a Viernes de 10:00 a 18:00",
+				"ubicacionDisponible": "2,3,4",
+				"imagen": "images/josezuluaga.jpg",
+			},
+			{
+				"nombre": "Martin",
+				"apellido": "Fulano",
+				"direccion": "Calle zutano",
+				"numCalle": "556",
+				"localidad": "Barrio Alto Barrio",
+				"departamento": "9",
+				"email": "martin@mengano.com",
+				"telefono": "5551234567",
+				"password": "clavemartin",
+				"id_oficio": "3,4",
+				"horarios": "Lunes a Viernes de 10:00 a 18:00",
+				"ubicacionDisponible": "2,3,4",
+				"imagen": "images/martinfulano.jpg",
+			}
+		]
+	}
+}
+
+-------------------
+LISTADO DE CONTRATISTAS PRIORIDAD 2 (GET) 
+primero que ande con todos, despues 
+en respuesta a localhost:8080/localidad 
+-------------------
+
+
+{
+	"contratistas": {
+		"contratistas": [
+			{
+				"id": "8",
+				"nombre": "Juan",
+				"apellido": "Gonzales",
+				"departamento": "10",
+				"email": "juangonzales@server.com",
+				"telefono": "123456789",
+				"horarios": "Jueves y Viernes de 10:00 a 18:00",
+				"ubicacionDisponible": "8,9",
+				"imagen": "images/juangonzales.jpg",
+			},
+			{
+				"id": "9",
+				"nombre": "Jose",
+				"apellido": "Zuluaga",
+				"departamento": "6",
+				"email": "inventado@server.com",
+				"telefono": "987654321",
+				"horarios": "Lunes a Viernes de 10:00 a 18:00",
+				"ubicacionDisponible": "2,3,4",
+				"imagen": "images/josezuluaga.jpg",
+			},
+			{
+				"id": "10",
+				"nombre": "Martin",
+				"apellido": "Fulano",
+				"departamento": "9",
+				"email": "martin@mengano.com",
+				"telefono": "5551234567",
+				"horarios": "Lunes a Viernes de 10:00 a 18:00",
+				"ubicacionDisponible": "2,3,4",
+				"imagen": "images/martinfulano.jpg",
+			}
+		]
+	}
+}
+
+
+-----------------------
+CREAR TRABAJO (PUT) PRIORIDAD 1
+-----------------------
+
+
+{
+	"trabajo": {
+		"trabajo": [
+			{
+				"id_cliente": "1",
+				"id_contratista": "8",
+				"domicilio_obra": "Calle los Arbolitos 45"
+				"descripcion": "revocar pared del patio, 4 metros cuadrados",
+				"presupuesto": "800",
+				"id_oficio": "1",
+				"estado": "Aceptado",
+				"comentarios_cliente": "sin comentarios aun",
+				"comentarios_contratista": "sin comentarios aun",
+				"puntuacion_contratista": "5",
+				"puntuacion_cliente": "3",
+			}
+		]
+	}
+}
+
+-----------------------------
+LISTAR TRABAJOS (GET) PRIORIDAD 2
+-----------------------------
+
+{
+	"trabajo": {
+		"trabajo": [
+			{
+				"id_cliente": "1",
+				"id_contratista": "8",
+				"domicilio_obra": "Calle los Arbolitos 45"
+				"descripcion": "revocar pared del patio, 4 metros cuadrados",
+				"presupuesto": "800",
+				"id_oficio": "1",
+				"estado": "Aceptado",
+				"comentarios_cliente": "sin comentarios aun",
+				"comentarios_contratista": "sin comentarios aun",
+				"puntuacion_contratista": "5",
+				"puntuacion_cliente": "3",
+			},
+			{
+				"id_cliente": "2",
+				"id_contratista": "9",
+				"domicilio_obra": "Calle los Botones 388"
+				"descripcion": "pintar interior casa 100m2",
+				"presupuesto": "8000",
+				"id_oficio": "2",
+				"estado": "En Proceso",
+				"comentarios_cliente": "sin comentarios aun",
+				"comentarios_contratista": "sin comentarios aun",
+				"puntuacion_contratista": "5",
+				"puntuacion_cliente": "3",
+			},
+			{
+				"id_cliente": "3",
+				"id_contratista": "10",
+				"domicilio_obra": "Calle los Pajaritos 45"
+				"descripcion": "instalar ceramicos baño",
+				"presupuesto": "5000",
+				"id_oficio": "1",
+				"estado": "Terminado",
+				"comentarios_cliente": "Quedo muy bonito!",
+				"comentarios_contratista": "Excelente Cliente",
+				"puntuacion_contratista": "5",
+				"puntuacion_cliente": "5",
+			},
+		]
+	}
+}
